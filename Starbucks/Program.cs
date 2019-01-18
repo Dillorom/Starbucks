@@ -50,15 +50,25 @@ namespace Starbucks
 
             foreach (var customer in customers)
             {
-                (bool isAvailable, decimal price) = john.Greeting(customer.FavDrinks).Any();
-                if (isAvailable)
+                var FavDrinksList = john.Greeting(customer.FavDrinks);
+                foreach (var drink in FavDrinksList)
                 {
-                    bool willBuy = customer.WillBuy(price);
-                    if (willBuy)
+                    (bool isAvailable, decimal price) = john.Greeting(customer.FavDrinks.Any()));
+                    if (isAvailable)
                     {
-                        john.Serve(customer.FavDrinks);
+                        bool willBuy = customer.WillBuy(price);
+                        if (willBuy)
+                        {
+                            john.Serve(customer.FavDrinks);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Sorry, we do not have your {drink} today.");
                     }
                 }
+               
+               
             }
 
             Console.WriteLine($"All customers served, items left in the inventory is :" +
