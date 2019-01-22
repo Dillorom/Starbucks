@@ -9,31 +9,55 @@ namespace Starbucks
     public class Barrista : Person
     {
         public Inventory inventory;
+        public Customer customer;
 
         public Barrista()
         {
             this.inventory = new Inventory();
+            this.customer = new Customer();
         }
 
-        public  (bool isAvailable, decimal price) Greeting(string choice)
+       
+       
+        //public  (bool isAvailable, decimal price) Greeting(string choice)
+        //{
+        //    if (this.inventory.drinks.Any(drink => drink.Name == choice))
+        //    {
+        //        Drink foundDrink = this.inventory.drinks.Where(drink => drink.Name == choice).First();
+        //        return (true, foundDrink.Price);
+        //    }
+        //    return (false, 0);
+        //}
+
+        public (bool isAvailable, decimal price) Greeting(string choice)
         {
-            if (this.inventory.drinks.Any(drink => drink.Name == choice))
+            //choice = this.customer.FavDrinks[0].Name;
+            foreach (FavDrinks d in this.customer.FavDrinks)
             {
-                Drink foundDrink = this.inventory.drinks.Where(drink => drink.Name == choice).First();
-                return (true, foundDrink.Price);
+                choice = d.Name;
+                if (this.inventory.drinks.Any(drink => drink.Name == choice))
+                {
+                    Drink foundDrink = this.inventory.drinks.Where(drink => drink.Name == choice).First();
+                    return (true, foundDrink.Price);
+                }
+                //return (false, 0);
             }
             return (false, 0);
         }
+            
 
-        public void Serve(string choice)
+        public void Serve(List<FavDrinks> favDrinks)
         {
-            Drink customerDrink =this.inventory.drinks.Where(drink => drink.Name == choice).First();
+
+            Drink customerDrink = this.inventory.drinks.Where(drink => drink.Name == FavDrinks);
             this.inventory.drinks.Remove(customerDrink);
+            Console.WriteLine($"{customerDrink} is served.");
+            Console.ReadKey();
         }
 
         internal (bool isAvailable, decimal price) Greeting(List<FavDrinks> favDrinks)
         {
-            throw new NotImplementedException();
+            return (false, 0);
         }
     }
 }
