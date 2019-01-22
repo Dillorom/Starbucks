@@ -16,9 +16,7 @@ namespace Starbucks
             this.inventory = new Inventory();
             this.customer = new Customer();
         }
-
-       
-       
+      
         //public  (bool isAvailable, decimal price) Greeting(string choice)
         //{
         //    if (this.inventory.drinks.Any(drink => drink.Name == choice))
@@ -43,8 +41,7 @@ namespace Starbucks
                 //return (false, 0);
             }
             return (false, 0);
-        }
-            
+        }         
 
         public void Serve(List<FavDrinks> favDrinks)
         {
