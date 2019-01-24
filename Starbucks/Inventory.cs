@@ -17,7 +17,7 @@ namespace Starbucks
                 {
                     Name = "Tea",
                     Quantity = 100,
-                    Price = 10,
+                    Price = 11,
 
                 } ,
                 new Drink
@@ -25,6 +25,24 @@ namespace Starbucks
                     Name = "Coffee",
                     Quantity = 100,
                     Price = 20
+                },
+                 new Drink
+                 {
+                    Name = "Latte",
+                    Quantity = 100,
+                    Price = 11
+                 },
+                  new Drink
+                {
+                    Name = "Mocha",
+                    Quantity = 100,
+                    Price = 13
+                },
+                   new Drink
+                {
+                    Name = "Chocolate",
+                    Quantity = 100,
+                    Price = 15
                 }
             };
         }

@@ -24,6 +24,10 @@ namespace Starbucks
                     new FavDrinks
                     {
                         Name = "Mocha",
+                    },
+                     new FavDrinks
+                    {
+                        Name = "Caramel",
                     }
                 },
 
@@ -32,7 +36,7 @@ namespace Starbucks
             customers.Add(new Customer
             {
                 Name = "Hassan",
-                Budget = 10,
+                Budget = 12,
                 FavDrinks = new List<FavDrinks>
                 {
                     new FavDrinks
@@ -58,20 +62,20 @@ namespace Starbucks
                     bool willBuy = customer.WillBuy(price);
                     if (willBuy)
                     {
-                        //john.Serve(customer.FavDrinks));
-                        foreach(FavDrinks d in FavDrinksList)
-                        {
-                            john.Serve(d.Name);
-                        }
+                        john.Serve(customer.FavDrinks);
+                        Console.WriteLine($"{customer.Name}, thank you for your purchase!\n ---Moving to the next customer---");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Sorry, {customer.Name}, you do not have enough money to purchase.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Sorry, we do not have your drink today.");
+                    Console.WriteLine($"Sorry {customer.Name}, we do not have your favorite drinks today.\n Moving to the next customer...");
                 }
             }
-            Console.WriteLine($"All customers served, items left in the inventory is :" +
-                $" {john.inventory.drinks.Count}");
+            Console.WriteLine($"All customers served.");
 
             Console.ReadKey();
         }

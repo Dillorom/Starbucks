@@ -17,53 +17,36 @@ namespace Starbucks
             this.customer = new Customer();
         }
 
-        //public  (bool isAvailable, decimal price) Greeting(string choice)
-        //{
-        //    if (this.inventory.drinks.Any(drink => drink.Name == choice))
-        //    {
-        //        Drink foundDrink = this.inventory.drinks.Where(drink => drink.Name == choice).First();
-        //        return (true, foundDrink.Price);
-        //    }
-        //    return (false, 0);
-        //}
-
-        //Link<FavDrinks> CustomerFavDrinks = this.customer.FavDrinks
-
-        public (bool isAvailable, decimal price) Greeting(string choice)
+        public (bool isAvailable, decimal price) Greeting(List<FavDrinks> favDrinks)
         {
-            //choice = this.customer.FavDrinks[0].Name;
-            foreach (FavDrinks d in this.customer.FavDrinks)
+            foreach (FavDrinks d in favDrinks)
             {
-                choice = d.Name;
-                if (this.inventory.drinks.Any(drink => drink.Name == choice))
+                if (inventory.drinks.Any(drink => drink.Name == d.Name))
                 {
-                    Drink foundDrink = this.inventory.drinks.Where(drink => drink.Name == choice).First();
+                    Drink foundDrink = this.inventory.drinks.Where(drink => drink.Name == d.Name).FirstOrDefault();
                     return (true, foundDrink.Price);
                 }
-                //return (false, 0);
+                return (false, 0);
             }
-            return (false, 0);
+            return (true, 10);
         }         
 
-        public void Serve(List<FavDrinks> favDrinks)
+        public  void Serve(List<FavDrinks> favDrinks)
         {
-            //foreach(List<Drinks> drinkInInventory in this.inventory.drinks)
-            // {
-            //   foreach(List<FavDrinks> favDrink in favDrinks)
-            // {
-            // if(drinkInInventory.Name == favDrink.Name)
-            //{ 
-            // Drink customerDrink = this.inventory.drinks.Where(drinkInInventory => drinkInInventory.Name == favDrink.Name);
-            //this.inventory.drinks.Remove(customerDrink);
-            //Console.WriteLine($"{customerDrink} is served.");
-            //Console.ReadKey();
-            //  
-
+            foreach (var favDrink in favDrinks)
+            {
+                if (inventory.drinks.Any(drink => drink.Name == favDrink.Name))
+                {
+                    Drink customerDrink = inventory.drinks.Where(drink => drink.Name == favDrink.Name).FirstOrDefault(); ;
+                    inventory.drinks.Remove(customerDrink);
+                    Console.WriteLine($"{customerDrink.Name} is served. Items left in the inventory is {inventory.drinks.Count}.");
+                 }
+            }
         }
 
-        internal (bool isAvailable, decimal price) Greeting(List<FavDrinks> favDrinks)
-        {
-            return (false, 0);
-        }
+        //internal (bool isAvailable, decimal price) Greeting(List<FavDrinks> favDrinks)
+        //{
+            
+        //}
     }
 }
