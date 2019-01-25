@@ -27,7 +27,7 @@ namespace Starbucks
             //}
 
             //with a loop
-            Drink foundDrink;
+            Drink foundDrink = null;
             foreach (FavDrinks d in favDrinks)
             {
                 if (inventory.drinks.Any(drink => drink.Name == d.Name))
