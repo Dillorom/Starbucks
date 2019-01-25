@@ -19,8 +19,11 @@ namespace Starbucks
 
         public (bool isAvailable, decimal price) Greeting(List<FavDrinks> favDrinks)
         {
-            //var favDrinksList = favDrinks.Select(d => d.Name).Intersect(inventory.drinks.Select(d => d.Name));
-            //var result = favDrinks.Where(d => favDrinksList.Contains(d.Name));
+            var inDrinksList = inventory.drinks.Select(d => d.Name).Intersect(favDrinks.Select(d => d.Name));
+            var result = inventory.drinks.Where(d => inDrinksList.Contains(d.Name));
+            var foundDrink = result.ToList().First();
+            return (true, foundDrink.Price);
+
 
             //Dictionary<string, double> tracker = new Dictionary<string, double>();
             //foreach (Drink inDrink in inventory.drinks)
@@ -38,22 +41,18 @@ namespace Starbucks
             //    }
             //    tracker.Intersect(inDrink.Name);
             //return (false, 0);
+            //}
 
-        //}
-
-
-        //use hash to keep track of things, and serve the first available one
-
-            foreach (FavDrinks d in favDrinks)
-            {
-                if (inventory.drinks.Any(drink => drink.Name == d.Name))
-                {
-                    var foundDrink = this.inventory.drinks.FirstOrDefault(drink => drink.Name == d.Name);
-                    return (true, foundDrink.Price);
-                }
-                return (false, 0);
-            }
-            return (false, 0);
+            //foreach (FavDrinks d in favDrinks)
+            //{
+            //    if (inventory.drinks.Any(drink => drink.Name == d.Name))
+            //    {
+            //        var foundDrink = this.inventory.drinks.FirstOrDefault(drink => drink.Name == d.Name);
+            //        return (true, foundDrink.Price);
+            //    }
+            //    return (false, 0);
+            //}
+            //return (false, 0);
         }         
 
         public  void Serve(List<FavDrinks> favDrinks)
